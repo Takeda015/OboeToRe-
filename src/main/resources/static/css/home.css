@@ -1,0 +1,303 @@
+@charset "UTF-8";
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+
+/*	font-family: "Hiragino Sans";*/
+	
+	background:
+		linear-gradient(180deg,
+			rgb(79, 79, 255) 0%,
+			rgb(145, 196, 253) 35%,
+			rgb(183, 220, 251) 45%,
+			rgb(255, 244, 255) 55%),
+		radial-gradient(circle at 80% 20%, #FFF5CC 40px, transparent 41px);
+	background-blend-mode: normal;
+	position: relative;
+	z-index: -3;
+
+	/*	800下回ったら横スクロール可能*/
+	min-width: 800px;
+	overflow-x: auto;
+}
+
+.haikei{
+	position: fixed;
+	    top: 0; left: 0;
+	    width: 100%;
+	    height: 100%;
+	    z-index: -2;
+	    background-image: url('/img/haikei.png');
+	    background-attachment: fixed;
+	    background-size: cover;
+	    background-position: center;
+}
+
+
+
+.overflow-auto::-webkit-scrollbar {
+	display: none;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.area-header h3 {
+	margin-bottom: 0;
+}
+
+/*時間流す*/
+.datetime-ticker {
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	top: 5vh;
+	white-space: nowrap;
+	height: 3vh;
+	
+	
+	/*  background: rgba(255,255,255,0.6);*/
+	color: white;
+	padding: 4px 0;
+	
+	font-family: "Arial Black","Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+.datetime-ticker-text {
+	/* 表示エリアの右外側からスタートさせる */
+	transform: translateX(100%);
+	display: inline-block;
+	padding-left: 100%;
+	animation: ticker-scroll 30s linear infinite;
+	
+	
+	
+
+}
+
+@keyframes ticker-scroll {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+
+
+/*==========左側の部分=============*/
+.flex-container {
+	display: flex;
+	/*	height: 100vh;*/
+	min-height: 100vh;
+	/*		background-color: rgb(0, 128, 255, 0.5);*/
+
+}
+
+.leftSide {
+	/*	background-color: rgb(255, 128, 192, 0.5);*/
+	flex: 1;
+
+	box-sizing: border-box;
+	/* 追加 */
+	padding: 50px 0 5px 5px;
+	/* 上・右なし・下・左 */
+
+	/*	縦方向のflexコンテナ*/
+	display: flex;
+	flex-direction: column;
+
+	/*	 画面の高さに合わせる */
+	/*	height: 100vh;*/
+
+	/* leftSide外へのはみ出しを防ぐ */
+	overflow: hidden;
+
+
+}
+
+.taskArea1 {
+	flex: 3;
+	/*	background-color: rgb(0, 128, 0, 0.5);*/
+	overflow: hidden;
+	min-height: 280px;
+}
+
+
+
+.shoppingListArea {
+	flex: 2;
+	/*	background-color: rgb(128, 255, 255, 0.5);*/
+	overflow: hidden;
+	min-height: 150px;
+}
+
+
+
+.scroll-wrapper {
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+
+.taskArea1 .overflow-auto {
+	height: calc(100% - 48px);
+	/* area-headerの高さ分を引く */
+	overflow-y: auto;
+	overflow-x: auto;
+	border-radius: 8px;
+}
+
+.shoppingListArea .overflow-auto {
+	height: calc(100% - 48px);
+	/* area-headerの高さ分を引く */
+	overflow-y: auto;
+	overflow-x: auto;
+	border-radius: 8px;
+}
+
+
+.area-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+
+.area-header button:first-of-type {
+	margin-left: auto;
+	/* 最初のボタンだけ右端へ押し出す */
+}
+
+table {
+
+	border-collapse: collapse;
+	/* セル間の隙間をなくす */
+	font-size: 14px;
+	background-color: rgba(255, 255, 255, 0.85);
+	/*	border-radius: 8px;*/
+	/*	overflow: hidden;*/
+
+	/*	折り返さない*/
+	white-space: nowrap;
+	width: 100%;
+	z-index: 1;
+}
+
+th {
+	background-color: rgb(143, 214, 248);
+	/* ヘッダー色 */
+	color: white;
+	text-align: left;
+	padding: 8px 12px;
+	font-weight: bold;
+}
+
+td {
+	padding: 6px 12px;
+	border-bottom: 1px solid #e0e0e0;
+	vertical-align: middle;
+}
+
+/* 1行おきに背景色（ゼブラストライプ） */
+tbody tr:nth-child(even) {
+	background-color: rgb(240, 248, 255);
+}
+
+/* ホバー時にハイライト */
+tbody tr:hover {
+	background-color: rgba(200, 230, 255, 0.8);
+	cursor: pointer;
+}
+
+
+
+/*=====右側の部分===============*/
+.right-col {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex: 1;
+	/*	background-color: rgb(255, 0, 0, 0.1);*/
+}
+
+/*メニュー*/
+.menu-wrapper {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	z-index: 200;
+}
+
+.dropdown {
+	position: absolute;
+	right: 0;
+	top: 100%;
+	background: white;
+	border: 1px solid #ccc;
+
+	border-radius: 4px;
+	min-width: 160px;
+	z-index: 200;
+	padding: 8px;
+}
+
+/* リマインド＋キャラの縦並びエリア */
+.reminder-char-area {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+
+
+.char_image {
+
+	display: block;
+	height: 500px;
+	/*	max-height: 80vh;*/
+	width: auto;
+	object-fit: contain;
+	padding-top: 100px;
+
+}
+
+
+/*リマインダーメッセージ*/
+.char_reminder {
+
+	position: absolute;
+	/* キャラ上部からの距離 */
+	top: 50px;
+
+	/* 水平中央揃え */
+	left: 50%;
+	transform: translateX(-50%);
+
+
+	/*ここで文字の折り返し*/
+	width: 290px;
+	text-align: left;
+	word-break: break-all;
+	white-space: normal;
+
+	/* メッセージの背景画像 */
+	background-image: url('/img/remindBack.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	/* 背景画像に合わせてpaddingで文字が画像内に収まるよう調整 */
+	padding: 20px 24px;
+	background-color: transparent;
+	/* 背景色(判別用) */
+	background: rgb(255, 255, 128, 0.5);
+}

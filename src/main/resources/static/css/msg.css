@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.error-msg {
+			display: none;
+			color: red;
+		}
+
+		.error-text {
+			color: red;
+		}

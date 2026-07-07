@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--/OboeToRe/src/main/resources/templates/register.html-->
+
+<head>
+	<meta charset="UTF-8">
+	<title>UserRegiPage</title>
+
+	<link rel="stylesheet" th:href="@{/css/msg.css}">
+</head>
+
+<body>
+
+	<a th:href="@{/login}">戻る</a>
+
+	<!--	ユーザーのステータスを表示する、IDとあだ名-->
+
+
+
+	<form th:action="@{/register}" method="post">
+
+		<p>ログイン用のユーザーＩＤを、４文字以上の半角英数字で作成</p>
+		<p>※他者との重複不可※必須</p>
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+		<p><input type="text" id="user_id" name="user_id" placeholder="ユーザーID"></p>
+		<span id="usernameError" class="error-msg">このIDはすでに使用されています</span>
+		<span id="uIDLengthError" class="error-msg">４文字以上必要です</span>
+
+
+		<p>アプリ内で使用するあなたの名称※必須</p>
+		<p><input type="text" name="nickname" placeholder="あだ名"></p>
+
+		<p>4文字以上のパスワードを決定※必須</p>
+		<input type="password" name="password" placeholder="パスワード">
+		<span id="passwordLengthError" class="error-msg">４文字以上必要です</span>
+
+		<p>パスワードの再入力※必須</p>
+		<input type="password" name="password2" placeholder="パスワード再入力">
+		<span id="passwordError" class="error-msg">再入力内容がパスワードと違います</span>
+		<span th:if="${passwordError}" th:text="${passwordError}" class="error-text"></span>
+
+
+		<p><button type="submit" id="submitBtn" disabled>登録</button></p>
+	</form>
+
+
+	<!--JavaScript-->
+	<script th:src="@{/script/register.js}"></script>
+</body>
+
+</html>

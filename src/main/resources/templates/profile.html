@@ -1,0 +1,105 @@
+<!--profile-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>profile Page</title>
+	<link rel="stylesheet" th:href="@{/css/msg.css}">
+	<link rel="stylesheet" th:href="@{/css/plofile.css}">
+	<link rel="stylesheet" th:href="@{/css/modal.css}">
+	<link rel="stylesheet" th:href="@{/css/animation.css}">
+	<link rel="stylesheet" th:href="@{/css/bottun.css}">
+</head>
+
+<body>
+
+
+	<!--	現状の情報を表示-->
+
+	<div class="Ustates">
+
+		<p>ユーザID（変更不可）：<span th:text="${nowUserId}"></span></p>
+		<p>現在のニックネーム：<span th:text="${nowNickname}"></span></p>
+
+		<!--	ボタン-->
+		<p>
+			<button onclick="changeNickModal()">ニックネーム変更</button>
+			<button onclick="changePassModal()">パスワード変更</button>
+		</p>
+
+		<p>
+			<a th:href="@{/home}">ホームに戻る</a>
+		</p>
+	</div>
+
+	<!--	googleCalendarからタスクを取得-->
+
+
+	<!-- nickname編集モーダル -->
+	<div id="nickModal" class="modal">
+		<div class="modal-inner">
+			<h2>ニックネーム変更</h2>
+
+			<form id="nickForm" action="/changeNick" method="post">
+				<!--CSRFこれを入れないとダメ↓-->
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+				<p>
+					新規ニックネーム<input type="text" id="newNickname" name="newNickname">
+				</p>
+
+				<span id="nickEmptyError" class="error-msg">ニックネームを入力してください</span>
+
+				<button type="submit">更新</button>
+				<button type="button" onclick="closeChangeNickModal()">閉じる</button>
+			</form>
+
+		</div>
+	</div>
+	</div>
+
+	<!-- パスワード変更モーダル -->
+	<div id="passModal" class="modal">
+		<div class="modal-inner">
+			<h2>パスワード変更</h2>
+
+			<form id="passForm" action="/changePass" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+				<p>パスワードは４文字以上の半角英数字で入力してください</p>
+				<p>
+					現在のパスワード<input type="password" name="currentPass">
+				</p>
+				<span id="currentPassError" class="error-msg">現在のパスワードを入力してください</span>
+				<p>
+					変更後のパスワード<input type="password" name="password">
+				</p>
+				<span id="passwordLengthError" class="error-msg">４文字以上必要です</span>
+				<p>
+					パスワードの再入力<input type="password" name="password2" placeholder="変更後のパスワードの再入力">
+				</p>
+				<span id="changePasswordError" class="error-msg">再入力内容がパスワードと違います</span> <span
+					th:if="${changePasswordError}" th:text="${changePasswordError}" class="error-text"></span>
+
+
+				<button type="submit">更新</button>
+				<button type="button" onclick="closeChangePassModal()">閉じる</button>
+			</form>
+
+		</div>
+	</div>
+	</div>
+
+	<div class="wave-container">
+		<div class="wave wave3"></div>
+		<div class="wave wave1"></div>
+		<div class="wave wave2"></div>
+
+
+	</div>
+
+	<script th:src="@{/script/profile.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<link rel="stylesheet" th:href="@{/css/login.css}">
+	<link rel="stylesheet" th:href="@{/css/animation.css}">
+	<link rel="stylesheet" th:href="@{/css/bottun.css}">
+
+	<meta charset="UTF-8">
+	<title>LoginPage</title>
+
+</head>
+
+
+
+<body>
+	<!-- バー（drop-bar）6本 -->
+	<div class="drop-bar-container">
+		<div class="drop-bar"></div>
+		<div class="drop-bar"></div>
+		<div class="drop-bar"></div>
+		<div class="drop-bar"></div>
+		<div class="drop-bar"></div>
+	</div>
+	
+	<div class="loginset">
+
+		<h1>Oboe To Re:</h1>
+		<p>タスク管理webアプリ</p>
+
+		<form action="/login" method="post" class="formObj">
+			<!--Spring SecurityがCSRFトークンを自動挿入する-->
+
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+
+			<p>
+				<!--name属性は"user_id"固定。Spring Securityがこの名前で受け取る-->
+				<input type="text" name="user_id" placeholder="ユーザーID">
+			</p>
+
+			<p>
+				<!--name属性は"password"固定。同上-->
+				<input type="password" name="password" placeholder="パスワード">
+			</p>
+
+			<p>
+				<button type="submit">ログイン</button>
+			</p>
+
+			<!--failureUrl("/login?error")で遷移してきた場合に表示-->
+			<p th:if="${param.error}">IDまたはパスワードが違います</p>
+		</form>
+
+		<a th:href="@{/register}">新規登録</a>
+
+	</div>
+
+	<div class="wave-container">
+		<div class="wave wave3"></div>
+		<div class="wave wave4"></div>
+		<div class="wave wave2"></div>
+
+	</div>
+
+
+
+
+
+
+</body>
+
+</html>

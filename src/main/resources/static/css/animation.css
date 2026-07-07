@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+
+/*棒が落ちてくやつ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝－*/
+/* 上から落ちてくる */
+@keyframes dropDown {
+
+	/*	あんま上から落とすと表示までの時間が長い*/
+	/*	0% {*/
+	/*		transform: translateY(-100vh);*/
+	/*		opacity: 0;*/
+	/*	}*/
+
+	0% {
+		/*なので-30vｈでちょっと上から落とす*/
+		transform: translateY(-30vh);
+		opacity: 0;
+		animation-timing-function: linear;
+	}
+
+	/*	20% {*/
+	/*		opacity: 1;*/
+	/*	}*/
+	
+	3% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(100vh);
+		opacity: 0;
+	}
+}
+
+.drop-bar {
+	position: fixed;
+	top: 0;
+	left: 20%;
+	transform: translateX(-50%);
+
+	width: 20px;
+	height: 200px;
+	background-color: rgba(0, 100, 200, 0.6);
+
+
+	/* コンテンツの後ろ */
+	z-index: -1;
+
+	/*ループ */
+	animation: dropDown 15s ease-in infinite;
+	animation-fill-mode: backwards;
+}
+
+/* 位置・時差・速さをずらす */
+.drop-bar:nth-child(1) {
+	/*	left: 20%;*/
+	left: 10px;
+
+	animation-delay: 0s;
+}
+
+.drop-bar:nth-child(2) {
+	/*	left: 80%;*/
+	left: 60px;
+	animation-delay: 7s;
+}
+
+.drop-bar:nth-child(3) {
+	/*	left: 40%;*/
+	left: 90px;
+	animation-delay: 4s;
+}
+
+.drop-bar:nth-child(4) {
+	left: 40%;
+	animation-delay: 8s;
+}
+
+.drop-bar:nth-child(5) {
+	left: 20%;
+	animation-delay: 10s;
+}
+
+.drop-bar:nth-child(6) {
+	left: 90%;
+	animation-delay: 10s;
+	animation-duration: 10s;
+}
+
+
+
+/*Wave===================================*/
+
+/* 波を画面下部に固定 */
+.wave-container {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 40vh;
+	overflow: hidden;
+	/* ログインボックスの後ろに配置 */
+	z-index: -1;
+
+}
+
+/* 波の共通設定 */
+.wave {
+	position: absolute;
+	bottom: 0;
+
+	/* 横に2倍伸ばしてスクロールさせる */
+	width: 200%;
+
+	/*	波の高さ*/
+	/*	height: 200px;*/
+	height: 40vh;
+
+
+	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 500'><path fill='rgba(255,255,255,1)' d='M0,75 C360,0 1080,150 1440,75 L1440,500 L0,500 Z'/></svg>");
+
+
+	/*	あとあとで描画変更したい時用のコメントアウト行*/
+	/*	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2880 300'><path fill='rgba(255,255,255,1)' d='M0,150 C720,300 2160,0 2880,150 L2880,300 L0,300 Z'/></svg>");*/
+
+	/*	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150'><path fill='rgba(255,255,255,1)' d='M0,75 C360,150 1080,0 1440,75 L1440,150 L0,150 Z'/></svg>");*/
+	/*	background-size: 50% 100%;*/
+
+	/*タイル貼り（横）*/
+	background-repeat: repeat-x;
+}
+
+/* 波のスクロールアニメーション */
+@keyframes waveMove {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+/* 1枚目：速め デフォ：白*/
+.wave1 {
+	animation: waveMove 4s linear infinite;
+	opacity: 0.8;
+}
+
+/* 2枚目：遅め・色を少し変える 白*/
+.wave2 {
+	animation: waveMove 6s linear infinite reverse;
+	opacity: 0.5;
+
+	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 250'><path fill='rgba(255,255,255,0.5)' d='M0,75 C360,0 1080,150 1440,75 L1440,500 L0,500 Z'/></svg>");
+	background-repeat: repeat-x;
+	background-size: 50% 100%;
+
+}
+
+/* 3枚目：透明度薄目 青*/
+.wave3 {
+	animation: waveMove 2s linear infinite reverse;
+	opacity: 0.5;
+
+	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 250'><path fill='rgba(79, 79, 255,0.2)' d='M0,75 C360,0 1080,150 1440,75 L1440,500 L0,500 Z'/></svg>");
+
+	background-repeat: repeat-x;
+	background-size: 50% 100%;
+
+}
+
+/*４枚目：遅め一番手前　青*/
+.wave4 {
+	animation: waveMove 10s linear infinite reverse;
+	opacity: 0.5;
+	background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 250'><path fill='rgba(10,10,255,0.8)' d='M0,75 C360,0 1080,150 1440,75 L1440,500 L0,500 Z'/></svg>");
+	background-repeat: repeat-x;
+	background-size: 50% 100%;
+}

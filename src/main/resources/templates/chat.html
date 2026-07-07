@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>オボエちゃんとチャット</title>
+	
+	<link rel="stylesheet" th:href="@{/css/chat.css}">
+	<link rel="stylesheet" th:href="@{/css/animation.css}">
+</head>
+
+<body>
+
+	<nav>
+		<a href="/home">ホームへ戻る</a>
+	</nav>
+
+	<h2>オボエちゃんと会話できるエリア</h2>
+
+	<!--チャットボックス==============-->
+	
+	<div class="wave-container">
+<!--			<div class="wave wave1"></div>-->
+			<div class="wave wave2"></div>
+
+		</div>
+	
+	<div id="chat-box">
+		<!-- 既存の会話履歴 -->
+		<th:block th:each="h : ${histories}">
+
+			<!--  ここでroleでクラスを分けながらhistories（リスト）の中身を表示-->
+			<div th:classappend="${h.role == 'user'} ? 'user' : 'model'" class="msg">
+			<span th:text="${h.content}"></span>
+			</div>
+		</th:block>
+	</div>
+	<!--ちゃっとぼっくす終わり=========-->
+
+
+	<!--ユーザーの入力=============-->
+	<div id="input-area">
+		<textarea id="user-input" placeholder="メッセージを入力…"></textarea>
+		<button id="send-btn" onclick="sendMessage()">送信</button>
+	</div>
+	<!--ユーザーの入力おわり=============-->
+
+	<!-- CSRFトークン（Ajax用） -->
+	<input type="hidden" id="csrf-token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+	<input type="hidden" id="csrf-header" th:value="${_csrf.headerName}">
+
+
+	<!--javaScript読む-->
+	<script th:src="@{/script/chat.js}"></script>
+
+</body>
+
+</html>

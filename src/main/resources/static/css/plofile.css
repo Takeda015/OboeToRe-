@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+body {
+	background-color: rgb(145, 196, 253);
+	/*	background-color: rgb(79, 79, 255);*/
+
+	display: flex;
+	/* 水平中央 */
+	justify-content: center;
+
+	/* 垂直中央 */
+	align-items: center;
+
+	height: 100vh;
+	margin: 0;
+
+}
+
+.Ustates {
+
+	background-color: rgb(255, 255, 255);
+	padding: 32px;
+	border-radius: 8px;
+	width: 300px;
+}

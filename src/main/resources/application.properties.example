@@ -1,0 +1,47 @@
+#DB接続・Gemini API・Thymeleaf設定等
+
+spring.application.name=OboeToRe
+
+#ポート番号を指定する
+server.port=7777
+
+
+#Thymeleaf
+spring.thymeleaf.cache=false
+
+
+# MySQLの接続設定＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+# MySQLドライバーを指定する
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# MySQLのURL
+spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3307/oboetore?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8}
+
+# MySQLのUSER NAME
+spring.datasource.username=${DB_USERNAME:root}
+
+# MySQLのPASSWORD（環境変数 DB_PASSWORD に設定）
+spring.datasource.password=${DB_PASSWORD}
+
+
+# Spring Securityのデフォルトユーザー無効化（任意）
+spring.security.user.name=dummy
+spring.security.user.password=dummy
+
+# セッションタイムアウトを無効
+server.servlet.session.timeout=0m
+
+# JPAのDDL自動生成（既存テーブルがあればnoneかvalidate）
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+
+
+#Geminiの利用（環境変数 GEMINI_API_KEY に設定）
+gemini.api.key=${GEMINI_API_KEY}
+gemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
+
+
+#GoogleカレンダーのOAuth（環境変数 GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET に設定）
+google.oauth.client-id=${GOOGLE_CLIENT_ID}
+google.oauth.client-secret=${GOOGLE_CLIENT_SECRET}
+google.oauth.redirect-uri=http://localhost:7777/google/callback
