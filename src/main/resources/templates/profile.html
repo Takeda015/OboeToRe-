@@ -10,11 +10,12 @@
 	<link rel="stylesheet" th:href="@{/css/modal.css}">
 	<link rel="stylesheet" th:href="@{/css/animation.css}">
 	<link rel="stylesheet" th:href="@{/css/bottun.css}">
+	<link rel="stylesheet" th:href="@{/css/homeLink.css}">
 </head>
 
 <body>
 
-
+	<a th:href="@{/home}" class="home-link">◁ HOME</a>
 	<!--	現状の情報を表示-->
 
 	<div class="Ustates">
@@ -28,9 +29,7 @@
 			<button onclick="changePassModal()">パスワード変更</button>
 		</p>
 
-		<p>
-			<a th:href="@{/home}">ホームに戻る</a>
-		</p>
+		
 	</div>
 
 	<!--	googleCalendarからタスクを取得-->

@@ -6,13 +6,13 @@
 	<meta charset="UTF-8">
 	<title>サブスクの一覧</title>
 	<link rel="stylesheet" th:href="@{/css/bottun.css}">
+	<link rel="stylesheet" th:href="@{/css/homeLink.css}">
+	<link rel="stylesheet" th:href="@{/css/sbsk.css}">
 </head>
 
 <body>
 	
-		<p>
-			<a th:href="@{/home}">ホームに戻る</a>
-		</p>
+		<a th:href="@{/home}" class="home-link">◁ HOME</a>
 
 <!--スクレイピングエラーでる。やってる時間がないので、一旦は普通に手動登録として実装へ変更-->
 		<!--現在の一覧表示-->

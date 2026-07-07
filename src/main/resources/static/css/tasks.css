@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
 
+body {
+	padding-top: 56px; /* .home-link の高さ(padding込み目安)+ top:16px 分 */
+}
 /*body{*/
 /*	background:*/
 /*			linear-gradient(180deg,*/

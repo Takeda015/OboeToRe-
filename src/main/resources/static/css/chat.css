@@ -3,73 +3,70 @@
 
 body {
 	background-color: rgb(128, 128, 255);
+	
+	padding-top: 56px;
+	
+
 }
 
 /* チャットボックス全体 */
 #chat-box {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-	
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
+
 	/*チャットボックスの表示がやたら長くなっちゃうのも困るので、エリアを制限してスクロールさせる。*/
 	height: 400px;
 	overflow: auto;
-	
-	background-color: rgb(255, 255, 255,0.5);
+
+	background-color: rgb(255, 255, 255, 0.5);
 }
 
 /*入力エリア右よせ*/
-#input-area{
-	
-/*	とりあえずフレックスコンテナって奴にしておくと並びを制御しやすい*/
+#input-area {
+
+	/*	とりあえずフレックスコンテナって奴にしておくと並びを制御しやすい*/
 	display: flex;
 	align-items: flex-end;
-	 gap: 8px;
-	 
+	gap: 8px;
+
 	margin-left: auto;
 	width: fit-content;
 }
 
-#user-input{
+#user-input {
 	font-size: 20px;
 	width: 500px;
-	height:50px;
+	height: 50px;
 }
 
-#send-btn{
+#send-btn {
 	width: 50px;
-	height:50px;
+	height: 50px;
 	border-radius: 2px;
 }
 
 /* 吹き出し共通 */
 .msg {
-    max-width: 70%;
-    padding: 10px 14px;
-    border-radius: 16px;
-    word-break: break-word;
+	max-width: 70%;
+	padding: 10px 14px;
+	border-radius: 16px;
+	word-break: break-word;
 }
 
 /* ユーザー → 右寄せ */
 .msg.user {
-    align-self: flex-end;
-    background-color: rgb(128, 255, 255);
-    border-bottom-right-radius: 2px; /* 吹き出し感 */
+	align-self: flex-end;
+	background-color: rgb(128, 255, 255);
+	border-bottom-right-radius: 2px;
+	/* 吹き出し感 */
 }
 
 /* AIの返信 → 左寄せ */
 .msg.model {
-    align-self: flex-start;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-bottom-left-radius: 2px;
+	align-self: flex-start;
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	border-bottom-left-radius: 2px;
 }
-
-
-
-
-
-
-
-

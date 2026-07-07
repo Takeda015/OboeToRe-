@@ -21,9 +21,9 @@
 		<!--		<div class="drop-bar"></div>-->
 
 	</div>
-	
+
 	<div class="haikei"></div>
-	
+
 	<!--左右分割-->
 	<div class="flex-container">
 		<div class="leftSide"><!--左側開始-->
@@ -37,7 +37,7 @@
 			<div class="taskArea1">
 
 				<div class="area-header">
-<!--					<h3 th:text="${#temporals.format(today, 'MM月dd日')} + 'まで／無期限のタスク'"></h3>-->
+					<!--					<h3 th:text="${#temporals.format(today, 'MM月dd日')} + 'まで／無期限のタスク'"></h3>-->
 					<h3 th:text="'今日まで／無期限のタスク'"></h3>
 					<button type="button" onclick="changeTaskStatus('DONE')">完了</button>
 					<button onclick="openTaskModal()">追加</button>
@@ -140,19 +140,24 @@
 			<!--＝＝＝各画面へのボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
 			<div class="menu-wrapper">
 				<button id="menuBtn" onclick="toggleMenu()">メニュー ▼</button>
-				<div id="dropdownMenu" class="dropdown hidden">
-					<p><a href="/chat">チャット画面へ</a></p>
-					<p><a href="/task">タスク一覧</a></p>
-					<p><a href="/subsk">サブスク一覧</a></p>
-					<p><a href="/sList">買い物リスト</a></p>
-					<p><a href="/profile">プロフィール</a></p>
 
+				<div id="dropdownMenu" class="dropdown hidden">
+					<a href="/chat" class="menu-item"> チャット画面へ</a>
+					<a href="/task" class="menu-item"> タスク一覧</a>
+					<a href="/subsk" class="menu-item"> サブスク一覧</a>
+					<a href="/sList" class="menu-item"> 買い物リスト</a>
+					<a href="/profile" class="menu-item"> プロフィール</a>
 					<form action="/logout" method="post" onsubmit="return confirm('ログアウトしますか？')">
 						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-						<button type="submit">ログアウト</button>
+						<button type="submit" class="menu-item">ログアウト</button>
 					</form>
 				</div>
+
 			</div>
+
+
+
+
 
 			<!-- リマインド＋キャラ横並び -->
 			<div class="reminder-char-area">

@@ -5,7 +5,7 @@ body {
 	height: 100%;
 	margin: 0;
 
-/*	font-family: "Hiragino Sans";*/
+	font-family: "Hiragino Sans";
 	
 	background:
 		linear-gradient(180deg,
@@ -54,7 +54,7 @@ body {
 	width: 100%;
 	overflow: hidden;
 	position: absolute;
-	top: 5vh;
+	top: 6vh;
 	white-space: nowrap;
 	height: 3vh;
 	
@@ -68,14 +68,12 @@ body {
 
 .datetime-ticker-text {
 	/* 表示エリアの右外側からスタートさせる */
+	
 	transform: translateX(100%);
 	display: inline-block;
 	padding-left: 100%;
 	animation: ticker-scroll 30s linear infinite;
 	
-	
-	
-
 }
 
 @keyframes ticker-scroll {
@@ -102,11 +100,12 @@ body {
 .leftSide {
 	/*	background-color: rgb(255, 128, 192, 0.5);*/
 	flex: 1;
-
+/*	top: 10vh;*/
 	box-sizing: border-box;
-	/* 追加 */
-	padding: 50px 0 5px 5px;
+	
 	/* 上・右なし・下・左 */
+	padding: 70px 0 5px 5px;
+	
 
 	/*	縦方向のflexコンテナ*/
 	display: flex;
@@ -146,16 +145,18 @@ body {
 
 
 .taskArea1 .overflow-auto {
-	height: calc(100% - 48px);
 	/* area-headerの高さ分を引く */
+	height: calc(100% - 48px);
+	
 	overflow-y: auto;
 	overflow-x: auto;
 	border-radius: 8px;
 }
 
 .shoppingListArea .overflow-auto {
-	height: calc(100% - 48px);
 	/* area-headerの高さ分を引く */
+	height: calc(100% - 48px);
+	
 	overflow-y: auto;
 	overflow-x: auto;
 	border-radius: 8px;
@@ -170,8 +171,9 @@ body {
 
 
 .area-header button:first-of-type {
-	margin-left: auto;
 	/* 最初のボタンだけ右端へ押し出す */
+	margin-left: auto;
+	
 }
 
 table {
@@ -246,7 +248,36 @@ tbody tr:hover {
 	min-width: 160px;
 	z-index: 200;
 	padding: 8px;
+	overflow: hidden;
 }
+
+.dropdown a.menu-item,
+.dropdown button.menu-item {
+	display: block;
+	width: 100%;
+/*	padding: 8px 10px;*/
+	padding: 10px 0;
+	border-radius: 6px;
+	border: none;
+	background: transparent;
+	color: #16122e;
+	font-size: 14px;
+	text-align: left;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.1s ease, color 0.1s ease;
+}
+
+.dropdown a.menu-item:hover,
+.dropdown button.menu-item:hover {
+	
+	background: #f2f0fc;
+	color: #3a5bf0;
+}
+
+
+
+
 
 /* リマインド＋キャラの縦並びエリア */
 .reminder-char-area {
