@@ -49,7 +49,7 @@ public class TaskSvc {
 	public void editTask(TaskForm tsf, String userId) {
 
 		//たぶんコピー使えば一発だけどそれ用に諸々を用意するのがだるいのでゲットしてセットしてる
-
+		//ここで例外投げてるからハンドリングがいるのでは。。。？
 		Task tsk = taskrepo.findByTaskIdAndUserId(tsf.getTaskId(), userId)
 				.orElseThrow(() -> new IllegalArgumentException("タスクが見つかりません"));
 		tsk.setTitle(tsf.getTitle());

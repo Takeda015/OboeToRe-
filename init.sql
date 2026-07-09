@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS subsk (
     user_id     VARCHAR(255)    NOT NULL,
     joined_at   DATE            NOT NULL,
     update_at   DATE            NOT NULL,
+    update_days  INT             NULL,
     PRIMARY KEY (subsk_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

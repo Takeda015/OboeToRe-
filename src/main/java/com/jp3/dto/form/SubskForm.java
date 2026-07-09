@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SubskForm {
 	//受け取るフィールド
+	private Long subskId;
 	private String userId;
 	private String subskName; 
 	
@@ -19,5 +20,7 @@ public class SubskForm {
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate updateAt;
+	
+	private  Integer updateDays;
 	
 }

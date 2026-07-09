@@ -8,16 +8,136 @@
 	<link rel="stylesheet" th:href="@{/css/bottun.css}">
 	<link rel="stylesheet" th:href="@{/css/homeLink.css}">
 	<link rel="stylesheet" th:href="@{/css/sbsk.css}">
+	<link rel="stylesheet" th:href="@{/css/modal.css}">
 </head>
 
 <body>
-	
-		<a th:href="@{/home}" class="home-link">◁ HOME</a>
 
-<!--スクレイピングエラーでる。やってる時間がないので、一旦は普通に手動登録として実装へ変更-->
-		<!--現在の一覧表示-->
-		<button class="btn btn-primary">加入中サブスクの追加</button>
-	
+	<a th:href="@{/home}" class="home-link">◁ HOME</a>
+
+	<!--スクレイピングエラーでる。やってる時間がないので、一旦は普通に手動登録として実装へ変更-->
+	<!--現在の一覧表示-->
+	<p><button class="btn btn-primary" onclick="openSbskModal()">加入中サブスクの追加</button>
+		<button class="btn btn-primary" onclick="">削除</button>
+
+	</p>
+
+
+	<!--表の出力-->
+	<table>
+		<thead>
+			<tr>
+				<th>サブスク名</th>
+				<th>開始日</th>
+				<th>更新日</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<!--買い物リストを持ってきて表示してる部分-->
+		<!--あとで値段をいれる-->
+		<tbody>
+			<tr th:each="SbskLists : ${SbskLists}">
+				<td th:text="${SbskLists.subskName}"></td>
+				<td th:text="${SbskLists.joinedAt}"></td>
+				<td th:text="${SbskLists.updateAt}"></td>
+
+				<td>
+					<!--編集ボタンに現在のパラメータを渡す-->
+					<button type="button" class="editBtn" th:data-subskId="${SbskLists.subskId}"
+						th:data-subskName="${SbskLists.subskName}" th:data-joinedAt="${SbskLists.joinedAt}"
+						th:data-updateAt="${SbskLists.updateAt}" th:data-updateDays="${SbskLists.updateDays}"
+						onclick="openEditModal(this)">編集</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+	<!--追加のモーダル-->
+	<div id="addSbskModal" class="modal">
+		<div class="modal-inner">
+			<h2>サブスクの追加</h2>
+			<form action="/addSbsk" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+				<p>名前<input type="text" name="subskName"></p>
+
+
+				<p>開始日<input type="date" name="joinedAt"
+						th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"></p>
+
+				<!--トグルで選択させる,thisで判別-->
+				<p>
+					<label><input type="radio" name="updateMode" value="days" checked
+							onchange="toggleUpdateMode(this)">開始日から日数で指定</label>
+					<label><input type="radio" name="updateMode" value="direct"
+							onchange="toggleUpdateMode(this)">日付を直接指定</label>
+				</p>
+
+
+				<!--選択内容：日数-->
+				<p class="daysGroup">開始日から
+					<input type="number" name="updateDays" min="1" value="30">日後
+				</p>
+
+				<!--選択内容：更新日-->
+				<p class="directGroup" style="display:none;">更新日
+					<input type="date" name="updateAt" disabled 
+						th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+				</p>
+
+				<button type="submit">追加</button>
+				<button type="button" onclick="closeSbskModal()">閉じる</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- 編集モーダル -->
+	<div id="editModal" class="modal">
+		<div class="modal-inner">
+			<h2>編集</h2>
+			<form action="/sbsk/edit" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+				<input type="hidden" name="subskId">
+
+				<p>サブスク名<input type="text" name="subskName"></p>
+
+				<p>開始日<input type="date" name="joinedAt"
+						th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"></p>
+
+				<!--トグルで選択させる-->
+				<p>
+					<label><input type="radio" name="updateMode" value="days"
+							onchange="toggleUpdateMode(this)">開始日から日数で指定</label>
+					<label><input type="radio" name="updateMode" value="direct" checked
+							onchange="toggleUpdateMode(this)">日付を直接指定</label>
+				</p>
+
+
+				<!--選択内容：日数-->
+				<p class="daysGroup" style="display:none;">開始日から
+					<input type="number" name="updateDays" min="1">日後
+				</p>
+
+
+				<!--選択内容：更新日-->
+				<p class="directGroup" style="display:none;">更新日
+					<input type="date" name="updateAt" disabled
+						th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+				</p>
+
+				<button type="submit">更新</button>
+				<button type="button" onclick="closeEditModal()">閉じる</button>
+			</form>
+		</div>
+	</div>
+
+
+
+	<!--スクリプトの読み込み-->
+	<script th:src="@{/script/subsk.js}"></script>
 </body>
 
 </html>

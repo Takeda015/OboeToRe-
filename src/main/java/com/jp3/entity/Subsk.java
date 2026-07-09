@@ -36,10 +36,14 @@ public class Subsk {
 	@Column(name = "update_at", nullable = false)
 	private LocalDate updateAt;
 
-	public Subsk(String userId, String subskName, LocalDate joinedAt, LocalDate updateAt) {
+	@Column(name = "update_days")
+	private Integer updateDays;
+
+	public Subsk(String userId, String subskName, LocalDate joinedAt, LocalDate updateAt, Integer updateDays) {
 		this.userId = userId;
 		this.subskName = subskName;
 		this.joinedAt = joinedAt;
 		this.updateAt = updateAt;
+		this.updateDays = updateDays;
 	}
 }

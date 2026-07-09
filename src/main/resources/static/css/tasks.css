@@ -26,7 +26,7 @@ table {
 	/*	overflow: hidden;*/
 
 	/*	折り返さない*/
-/*	white-space: nowrap;*/
+	white-space: nowrap;
 	width: 100%;
 }
 

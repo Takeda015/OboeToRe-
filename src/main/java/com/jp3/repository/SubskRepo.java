@@ -2,6 +2,7 @@ package com.jp3.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,9 @@ public interface SubskRepo extends JpaRepository<Subsk, Long> {
 	
 
 	List<Subsk> findByUpdateAtAndUserId(LocalDate date,String userId);
+	
+	
+	Optional<Subsk> findBySubskIdAndUserId(Long subskId,String userId);
+	
 }
+
