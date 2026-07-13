@@ -8,6 +8,16 @@
      return Array.from(document.querySelectorAll('.sListCheck:checked')).map(cb => cb.value);
  }
  
+ function delSList(){
+	const ids = getCheckedIds();//IDのリストに中身ある？
+	if (ids.length === 0) { alert('削除する物品を選択してください'); return; }
+	if (confirm(ids.length + '件削除しますか？')) {
+	         appendIdsToForm('delSLForm', ids);
+	         document.getElementById('delSLForm').submit();
+	     }
+ }
+ 
+ 
  //選択したIDを渡す。
  function appendIdsToForm(formId, ids) {
      const form = document.getElementById(formId);
@@ -49,7 +59,7 @@
  
  //買い物リストモーダル
  function openSListModal() {
-     document.getElementById("sListModal").style.display = "block";
+     document.getElementById("sListModal").style.display = "flex";
  }
  function closeSListModal() {
      document.getElementById("sListModal").style.display = "none";

@@ -45,5 +45,13 @@ public class ChatCtl {
 		//こいつ↓がbodyとして返ってく
 		return chatSvc.chat(userId, message);
 	}
+	
+	//チャット履歴の全件削除
+	@PostMapping("/chat/del")
+	public String delChat() {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		chatSvc.delChat(userId);
+		return "redirect:/chat";
+	}
 
 }

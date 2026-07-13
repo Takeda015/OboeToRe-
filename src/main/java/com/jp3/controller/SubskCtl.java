@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jp3.dto.form.SubskForm;
 import com.jp3.entity.Subsk;
+import com.jp3.repository.SubskRepo;
 import com.jp3.service.SubskSvc;
 
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SubskCtl {
 
+	private final SubskRepo subskRepo;
 	private final SubskSvc subskSvc;
+
 
 	@GetMapping("/subsk")
 	public String subskPage(Model model) {
@@ -37,13 +41,23 @@ public class SubskCtl {
 		subskSvc.subRegi(subskForm);
 		return "redirect:/subsk";
 	}
-	
+
 	//内容編集
-		@PostMapping("/sbsk/edit")
-		public String editTask(SubskForm subskForm) {
-			String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-			subskSvc.editSbsk(subskForm, userId);
-			return "redirect:/subsk";
-		}
+	@PostMapping("/sbsk/edit")
+	public String editSbsk(SubskForm subskForm) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		subskSvc.editSbsk(subskForm, userId);
+		return "redirect:/subsk";
+	}
 	
+	
+	//選択したやつの削除
+	@PostMapping("/sbsk/del")
+	public String delSbsk(@RequestParam List<Long> subskId) {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		subskSvc.delSbsk(subskId, userId);
+		return "redirect:/subsk";
+	}
+
 }

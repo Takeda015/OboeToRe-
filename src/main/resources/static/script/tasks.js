@@ -30,6 +30,16 @@ function confirmDelete() {
     }
 }
 
+//doneのタスクを削除する
+function allDoneDelete() {
+
+    if (confirm('完了済みのタスクをすべて削除しますか？')) {
+        document.getElementById('doneDeleteForm').submit();
+    }
+
+}
+
+
 //ステータス変更するタスクの確認
 function changeStatus(status) {
     const ids = getCheckedIds();
@@ -43,7 +53,7 @@ function changeStatus(status) {
 }
 
 //ボタン押したときに出すやつ、これはタスク追加するモーダル
-function openModal() { document.getElementById('taskModal').style.display = 'block'; }
+function openModal() { document.getElementById('taskModal').style.display = 'flex'; }
 function closeModal() { document.getElementById('taskModal').style.display = 'none'; }
 
 //編集するボタンのモーダル
@@ -57,7 +67,7 @@ function openEditModal(taskId, title, description, priority, startDate, startTim
     document.getElementById('editDueDate').value = dueDate;
     document.getElementById('editDueTime').value = dueTime;
     document.getElementById('editLocation').value = location;
-    document.getElementById('editModal').style.display = 'block';
+    document.getElementById('editModal').style.display = 'flex';
 }
 function closeEditModal() { document.getElementById('editModal').style.display = 'none'; }
 

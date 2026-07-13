@@ -14,12 +14,14 @@ public interface SubskRepo extends JpaRepository<Subsk, Long> {
 
 	//	とりまユーザーで検索する
 	List<Subsk> findByUserId(String userId);
-	
 
-	List<Subsk> findByUpdateAtAndUserId(LocalDate date,String userId);
+	//	更新日とユーザーで検索する
+	List<Subsk> findByUpdateAtAndUserId(LocalDate date, String userId);
+
+	//サブスクのIDとユーザーで検索する
+	List<Subsk> findBySubskIdInAndUserId(List<Long> subskId, String userId);
 	
 	
-	Optional<Subsk> findBySubskIdAndUserId(Long subskId,String userId);
-	
+	Optional<Subsk> findBySubskIdAndUserId(Long subskId, String userId);
+
 }
-

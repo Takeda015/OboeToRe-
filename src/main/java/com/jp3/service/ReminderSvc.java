@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClient;
 import com.jp3.constant.GeminiPromptConst;
 import com.jp3.entity.ChatHist;
 import com.jp3.entity.ShoppingList;
+import com.jp3.entity.Subsk;
 import com.jp3.entity.Task;
 import com.jp3.entity.User;
 import com.jp3.repository.ChatHistRepo;
@@ -25,6 +26,7 @@ public class ReminderSvc {
 
 	private final TaskSvc taskSvc;
 	private final ShoppingListSvc sListSvc;
+	private final SubskSvc subskSvc;
 	private final ChatHistRepo chatHistRepo;
 	private final RestClient geminiRestClient;
 	private final UserRepo userRepo;
@@ -65,9 +67,10 @@ public class ReminderSvc {
 		//今日のタスクを取得
 		String taskInfo = buildTaskInfo(todayTasks);
 
-		//買い物リストとソシャゲとサブスクを後で追加（する・・・？）
-		
-		
+		//サブスクの期限が今日のやつを出す
+		List<Subsk> todaySbsk = subskSvc.getTodaySbskByUser(userId, LocalDate.now());
+		String sbskInfo = buildSbskInfo(todaySbsk);
+
 		//買い物リストの追加
 		List<ShoppingList> SList = sListSvc.getSListTodo(userId);
 		String soppingInfo = buildShopInfo(SList);
@@ -76,9 +79,10 @@ public class ReminderSvc {
 
 		// GeminiPromptConstからプロンプト構築
 		String prompt = String.format(GeminiPromptConst.REMINDER_SYSTEM, nickname)
-				+ "\n【今日のタスク】\n" + taskInfo
+				+ "\n【今日が期限のタスク】\n" + taskInfo
 				+ "\n【最近のユーザーとの会話（参考）】\n" + chatSummary.toString()
 				+ "\n【買い物リスト】\n" + soppingInfo
+				+ "\n【サブスク】\n" + sbskInfo
 				+ "\n" + GeminiPromptConst.REMINDER_SUFFIX;
 
 		List<Map<String, Object>> contents = List.of(
@@ -112,7 +116,7 @@ public class ReminderSvc {
 	//ここでストリングbuilderでタスクのリストを文字列として受け取る
 	private String buildTaskInfo(List<Task> tasks) {
 		if (tasks.isEmpty())
-			return "今日のタスクはありません。";
+			return "今日のタスクはなし";
 		StringBuilder sb = new StringBuilder();
 		for (Task t : tasks) {
 			sb.append("・").append(t.getTitle())
@@ -122,15 +126,26 @@ public class ReminderSvc {
 		return sb.toString();
 	}
 
-	//ここでストリングbuilderでタスクのリストを文字列として受け取る
+	//ストリングbuilderで買い物リストのリストを文字列として受け取る
 	private String buildShopInfo(List<ShoppingList> SList) {
 		if (SList.isEmpty())
-		return "今日の買い物リストはありません。";
+			return "今日の買い物リストはなし";
 		StringBuilder sb2 = new StringBuilder();
 		for (ShoppingList s : SList) {
 			sb2.append("・").append(s.getItemName());
 		}
 		return sb2.toString();
+	}
+
+	//ストリングbuilderでサブスクのリストを文字列として受け取る
+	private String buildSbskInfo(List<Subsk> SbskList) {
+		if (SbskList.isEmpty())
+			return "今日が更新日のサブスクはなし";
+		StringBuilder sb3 = new StringBuilder();
+		for (Subsk s : SbskList) {
+			sb3.append("・").append(s.getSubskName());
+		}
+		return sb3.toString();
 	}
 
 	//クロード曰く、@SuppressWarningsは必要らしい
@@ -146,7 +161,7 @@ public class ReminderSvc {
 			//パーツに含まれるテキスト情報をストリングで返す
 			return (String) parts.get(0).get("text");
 		} catch (Exception e) {
-			return "今日もタスクやって";
+			return "今日もタスクをやっていこう";
 		}
 	}
 }

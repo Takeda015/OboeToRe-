@@ -28,6 +28,12 @@ public class ShoppingListSvc {
 		sListRepo.save(sL);
 	}
 
+	//削除
+	public void deleteSList(List<Long> shoppingIds,String userId) {
+		List<ShoppingList> delList = sListRepo.findByShoppingIdInAndUserId(shoppingIds, userId);
+		sListRepo.deleteAll(delList);
+	}
+	
 	//未完了買い物リスト表示
 	public List<ShoppingList> getSListTodo(String userId) {
 		List<ShoppingList> sLL = sListRepo.findByUserIdAndStatus(userId, "TODO");

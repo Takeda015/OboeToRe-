@@ -1,12 +1,14 @@
 @charset "UTF-8";
 
+
+
 html,
 body {
 	height: 100%;
 	margin: 0;
 
 	font-family: "Hiragino Sans";
-	
+
 	background:
 		linear-gradient(180deg,
 			rgb(79, 79, 255) 0%,
@@ -19,20 +21,22 @@ body {
 	z-index: -3;
 
 	/*	800下回ったら横スクロール可能*/
-	min-width: 800px;
+	min-width: 600px;
 	overflow-x: auto;
+	/*	overflow-y: hidden;*/
 }
 
-.haikei{
+.haikei {
 	position: fixed;
-	    top: 0; left: 0;
-	    width: 100%;
-	    height: 100%;
-	    z-index: -2;
-	    background-image: url('/img/haikei.png');
-	    background-attachment: fixed;
-	    background-size: cover;
-	    background-position: center;
+
+
+	inset: 0;
+	z-index: -5;
+	background-image: url('/img/haikei.png');
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	overflow: hidden;
 }
 
 
@@ -49,31 +53,34 @@ body {
 	margin-bottom: 0;
 }
 
-/*時間流す*/
+/*時間流す感じの文字の帯的なもの*/
 .datetime-ticker {
 	width: 100%;
 	overflow: hidden;
 	position: absolute;
-	top: 6vh;
+
+	/*	position: fixed;*/
+
+	top: 8%;
 	white-space: nowrap;
-	height: 3vh;
-	
-	
+	height: 16px;
+
+	z-index: 5;
 	/*  background: rgba(255,255,255,0.6);*/
 	color: white;
 	padding: 4px 0;
-	
-	font-family: "Arial Black","Hiragino Sans", "Yu Gothic", sans-serif;
+
+	font-family: "Arial Black", "Hiragino Sans", "Yu Gothic", sans-serif;
 }
 
 .datetime-ticker-text {
 	/* 表示エリアの右外側からスタートさせる */
-	
+
 	transform: translateX(100%);
 	display: inline-block;
 	padding-left: 100%;
 	animation: ticker-scroll 30s linear infinite;
-	
+
 }
 
 @keyframes ticker-scroll {
@@ -91,28 +98,27 @@ body {
 /*==========左側の部分=============*/
 .flex-container {
 	display: flex;
-	/*	height: 100vh;*/
-	min-height: 100vh;
-	/*		background-color: rgb(0, 128, 255, 0.5);*/
+	height: 100vh;
+	/*	min-height: 100vh;*/
+	/*			background-color: rgb(0, 128, 255, 0.5);*/
 
 }
 
 .leftSide {
 	/*	background-color: rgb(255, 128, 192, 0.5);*/
 	flex: 1;
-/*	top: 10vh;*/
+	/*	top: 10vh;*/
 	box-sizing: border-box;
-	
+
 	/* 上・右なし・下・左 */
-	padding: 70px 0 5px 5px;
-	
+	padding-top: 80px;
+	padding-bottom: 5px;
+
 
 	/*	縦方向のflexコンテナ*/
 	display: flex;
 	flex-direction: column;
 
-	/*	 画面の高さに合わせる */
-	/*	height: 100vh;*/
 
 	/* leftSide外へのはみ出しを防ぐ */
 	overflow: hidden;
@@ -121,45 +127,56 @@ body {
 }
 
 .taskArea1 {
-	flex: 3;
+	padding-left: 5px;
+
 	/*	background-color: rgb(0, 128, 0, 0.5);*/
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
-	min-height: 280px;
+	min-height: 150px;
+	border-radius: 8px;
+
 }
 
 
 
 .shoppingListArea {
-	flex: 2;
-	/*	background-color: rgb(128, 255, 255, 0.5);*/
+	/*	background-color: rgb(0, 0, 0);	*/
+	padding-top: 21px;
+	padding-left: 5px;
+	padding-bottom: 0;
+
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
 	min-height: 150px;
+	border-radius: 8px;
+
 }
 
 
 
 .scroll-wrapper {
-	border-radius: 8px;
+	flex: 1;
 	overflow: hidden;
 }
 
 
 .taskArea1 .overflow-auto {
-	/* area-headerの高さ分を引く */
-	height: calc(100% - 48px);
-	
+	height: 100%;
 	overflow-y: auto;
 	overflow-x: auto;
 	border-radius: 8px;
 }
 
 .shoppingListArea .overflow-auto {
-	/* area-headerの高さ分を引く */
-	height: calc(100% - 48px);
-	
+	height: 100%;
 	overflow-y: auto;
 	overflow-x: auto;
 	border-radius: 8px;
+
 }
 
 
@@ -173,7 +190,7 @@ body {
 .area-header button:first-of-type {
 	/* 最初のボタンだけ右端へ押し出す */
 	margin-left: auto;
-	
+
 }
 
 table {
@@ -182,8 +199,8 @@ table {
 	/* セル間の隙間をなくす */
 	font-size: 14px;
 	background-color: rgba(255, 255, 255, 0.85);
-	/*	border-radius: 8px;*/
-	/*	overflow: hidden;*/
+	border-radius: 8px;
+	overflow: hidden;
 
 	/*	折り返さない*/
 	white-space: nowrap;
@@ -215,66 +232,26 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
 	background-color: rgba(200, 230, 255, 0.8);
 	cursor: pointer;
+	z-index: 1;
 }
 
 
 
 /*=====右側の部分===============*/
 .right-col {
+
+
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: safe flex-end;
+
+	overflow: hidden;
+	padding-top: 5%;
 	flex: 1;
+
 	/*	background-color: rgb(255, 0, 0, 0.1);*/
 }
-
-/*メニュー*/
-.menu-wrapper {
-	position: absolute;
-	top: 8px;
-	right: 8px;
-	z-index: 200;
-}
-
-.dropdown {
-	position: absolute;
-	right: 0;
-	top: 100%;
-	background: white;
-	border: 1px solid #ccc;
-
-	border-radius: 4px;
-	min-width: 160px;
-	z-index: 200;
-	padding: 8px;
-	overflow: hidden;
-}
-
-.dropdown a.menu-item,
-.dropdown button.menu-item {
-	display: block;
-	width: 100%;
-/*	padding: 8px 10px;*/
-	padding: 10px 0;
-	border-radius: 6px;
-	border: none;
-	background: transparent;
-	color: #16122e;
-	font-size: 14px;
-	text-align: left;
-	text-decoration: none;
-	cursor: pointer;
-	transition: background 0.1s ease, color 0.1s ease;
-}
-
-.dropdown a.menu-item:hover,
-.dropdown button.menu-item:hover {
-	
-	background: #f2f0fc;
-	color: #3a5bf0;
-}
-
 
 
 
@@ -286,6 +263,7 @@ tbody tr:hover {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	top: 10px;
 
 }
 
@@ -294,10 +272,11 @@ tbody tr:hover {
 
 	display: block;
 	height: 500px;
-	/*	max-height: 80vh;*/
+	/*width: 50%;*/
+
 	width: auto;
 	object-fit: contain;
-	padding-top: 100px;
+	/*	background: rgb(128, 255, 128);*/
 
 }
 
@@ -307,7 +286,7 @@ tbody tr:hover {
 
 	position: absolute;
 	/* キャラ上部からの距離 */
-	top: 50px;
+	top: -50px;
 
 	/* 水平中央揃え */
 	left: 50%;
@@ -330,5 +309,5 @@ tbody tr:hover {
 	padding: 20px 24px;
 	background-color: transparent;
 	/* 背景色(判別用) */
-	background: rgb(255, 255, 128, 0.5);
+	background: rgb(255, 255, 255, 0.5);
 }

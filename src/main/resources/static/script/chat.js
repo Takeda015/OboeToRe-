@@ -2,6 +2,18 @@
  * chat.htmlのjavascript
  */
 
+//削除セット============================================
+//削除するボタン押した
+function delChat() {
+    if (confirm('削除しますか？')) {
+        document.getElementById('delChatForm').submit();
+    }
+}
+//削除セット終わり=======================
+
+
+
+
 //chatBoxを生成する
 const chatBox = document.getElementById('chat-box');
 chatBox.scrollTop = chatBox.scrollHeight;

@@ -1,57 +1,20 @@
 @charset "UTF-8";
 
-body{
+body {
+	margin: 0;  
+	box-sizing: border-box;
 	padding-top: 75px;
-}
-
-table {
-	border-collapse: collapse;
-	/* セル間の隙間をなくす */
-	font-size: 14px;
-	background-color: rgba(255, 255, 255, 0.85);
-		border-radius: 8px;
-	/*	overflow: hidden;*/
-	padding-top: 15px;
-	
-	/*	折り返さない*/
-	white-space: nowrap;
-	width: 100%;
-}
-
-
-th {
-	
-	background-color: rgb(254, 239, 254);
-	/* ヘッダー色 */
-	color: rgb(0, 128, 255);
-	text-align: left;
-	padding: 8px 12px;
-	font-weight: bold;
-}
-
-td {
-	padding: 6px 12px;
-	border-bottom: 1px solid #e0e0e0;
-	vertical-align: middle;
-	
-}
-
-.no-wrap {
-    white-space: nowrap;  /* 折り返さない */
-}
-
-.wrap {
-    white-space: normal;  /* 折り返す */
-    min-width: 100px;     /* 折り返す列は最低幅を指定するときれい */
-}
-
-/* 1行おきに背景色（ゼブラストライプ） */
-tbody tr:nth-child(even) {
-	background-color: rgba(240, 248, 255, 0.8);
-}
-
-/* ホバー時にハイライト */
-tbody tr:hover {
-	background-color: rgba(200, 230, 255, 0.8);
-	cursor: pointer;
+	background:
+		linear-gradient(180deg,
+			rgb(79, 79, 255) 0%,
+			rgb(145, 196, 253) 35%,
+			rgb(183, 220, 251) 55%,
+			rgb(255, 244, 255) 75%),
+		radial-gradient(circle at 80% 20%, #FFF5CC 40px, transparent 41px);
+	background-attachment: fixed;
+	background-size: cover;
+	background-blend-mode: normal;
+	position: relative;
+	z-index: -3;
+	min-height: 100vh;
 }

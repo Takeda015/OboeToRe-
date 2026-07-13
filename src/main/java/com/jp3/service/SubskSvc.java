@@ -19,7 +19,7 @@ public class SubskSvc {
 
 	private final SubskRepo subskRepo;
 
-	//Formつくっていれる
+	//追加：Formつくっていれる
 	public void subRegi(SubskForm subskForm) {
 
 		if (subskForm.getUpdateDays() == null) {
@@ -31,7 +31,7 @@ public class SubskSvc {
 			//日数を足す
 			LocalDate calcDate = subskForm.getJoinedAt().plusDays(subskForm.getUpdateDays());
 			subskForm.setUpdateAt(calcDate);
-		}else {
+		} else {
 			//本当はここで例外をスローしてcontrollerで失敗を出したいんだけど、後回し
 			return;
 		}
@@ -52,6 +52,13 @@ public class SubskSvc {
 		return sbl;
 	}
 
+	//今日が期限のサブスクを探す
+	public List<Subsk> getTodaySbskByUser(String userId, LocalDate today) {
+		List<Subsk> todaysbl = subskRepo.findByUpdateAtAndUserId(today, userId);
+		return todaysbl;
+	}
+
+	//サブスクの内容編集
 	public void editSbsk(SubskForm subskForm, String userId) {
 
 		if (subskForm.getUpdateDays() == null) {
@@ -63,18 +70,23 @@ public class SubskSvc {
 			//日数を足す
 			LocalDate calcDate = subskForm.getJoinedAt().plusDays(subskForm.getUpdateDays());
 			subskForm.setUpdateAt(calcDate);
-		}else {
+		} else {
 			//本当はここで例外をスローしてcontrollerで失敗を出したいんだけど、今は後回し
 			return;
 		}
 
 		Subsk sbsk = subskRepo.findBySubskIdAndUserId(subskForm.getSubskId(), userId)
-		        .orElseThrow(() -> new IllegalArgumentException("対象のサブスクが見つかりません"));
-
+				.orElseThrow(() -> new IllegalArgumentException("対象のサブスクが見つかりません"));
 		BeanUtils.copyProperties(subskForm, sbsk, "subskId", "userId");
-		
 
 		subskRepo.save(sbsk);
+	}
+
+	//削除
+	public void delSbsk(List<Long> subskId, String userId) {
+		List<Subsk> delsbsk = subskRepo.findBySubskIdInAndUserId(subskId, userId);
+		subskRepo.deleteAll(delsbsk);
+
 	}
 
 }

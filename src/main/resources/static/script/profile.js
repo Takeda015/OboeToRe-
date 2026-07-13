@@ -3,14 +3,14 @@
  */
 //モーダル出したりしまったりする
 function changeNickModal() {
-    document.getElementById("nickModal").style.display = "block";
+    document.getElementById("nickModal").style.display = "flex";
 }
 function closeChangeNickModal() {
     document.getElementById("nickModal").style.display = "none";
 }
 
 function changePassModal() {
-    document.getElementById("passModal").style.display = "block";
+    document.getElementById("passModal").style.display = "flex";
 }
 function closeChangePassModal() {
     document.getElementById("passModal").style.display = "none";

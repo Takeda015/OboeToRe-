@@ -24,11 +24,10 @@ public class ShoppingListCtl {
 	@GetMapping("/sList")
 	public String getShoppingList(Model model) {
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-		
+
 		//ここ全部取得じゃないとダメだわ・・・
 		List<ShoppingList> sLL = shoppingListSvc.getSList(userId);
 		model.addAttribute("todoSLists", sLL);
-		
 
 		return "shoppingList";
 	}
@@ -53,19 +52,27 @@ public class ShoppingListCtl {
 
 	//お買い物リストのステータス変更
 	@PostMapping("/sList/status")
-	public String name(@RequestParam List<Long> shoppingIds, @RequestParam String status,@RequestParam String redirectTo) {
-		
+	public String changeSLisStates(@RequestParam List<Long> shoppingIds, @RequestParam String status,
+			@RequestParam String redirectTo) {
+
 		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		shoppingListSvc.updateStatus(shoppingIds, status, userId);
-		
+
 		//ホームから飛んで来たらホームに、詳細から飛んでたら詳細に返す
 		String back = "/sList";
 		if (redirectTo.equals("homePage")) {
 			back = "/home";
 		}
-
-		
 		return "redirect:" + back;
+	}
+
+	//削除する
+	@PostMapping("/sList/del")
+	public String delSList(@RequestParam List<Long> shoppingIds) {
+
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		shoppingListSvc.deleteSList(shoppingIds, userId);
+		return "redirect:/sList";
 	}
 
 }

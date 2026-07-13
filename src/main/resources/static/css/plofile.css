@@ -2,8 +2,16 @@
 
 
 body {
-	background-color: rgb(145, 196, 253);
-	/*	background-color: rgb(79, 79, 255);*/
+	background:
+		linear-gradient(180deg,
+			rgb(79, 79, 255) 0%,
+			rgb(145, 196, 253) 35%,
+			rgb(183, 220, 251) 55%,
+			rgb(255, 244, 255) 75%),
+		radial-gradient(circle at 80% 20%, #FFF5CC 40px, transparent 41px);
+	background-blend-mode: normal;
+	position: relative;
+	z-index: -3;
 
 	display: flex;
 	/* 水平中央 */
@@ -24,5 +32,3 @@ body {
 	border-radius: 8px;
 	width: 300px;
 }
-
-

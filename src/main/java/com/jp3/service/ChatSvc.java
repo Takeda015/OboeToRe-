@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClient;
 import com.jp3.constant.GeminiPromptConst;
 import com.jp3.entity.ChatHist;
 import com.jp3.entity.ShoppingList;
+import com.jp3.entity.Subsk;
 import com.jp3.entity.Task;
 import com.jp3.entity.User;
 import com.jp3.repository.ChatHistRepo;
@@ -33,6 +34,7 @@ public class ChatSvc {
 	private final TaskSvc taskSvc;
 
 	private final ShoppingListSvc sListSvc;
+	private final SubskSvc subskSvc;
 
 	//Geminiのクライアント情報
 	@Qualifier("geminiRestClient")
@@ -57,18 +59,21 @@ public class ChatSvc {
 		List<ShoppingList> SList = sListSvc.getSListTodo(userId);
 		String soppingInfo = buildShopInfo(SList);
 
+		//サブスクの期限が今日のやつを出す
+				List<Subsk> sbskList = subskSvc.getSbskList(userId);
+				String sbskInfo = buildSbskInfo(sbskList);
+		
 		// nickname取得
 		String nickname = userRepo.findById(userId).map(User::getNickname).orElse("ユーザー");
 
 		// contents構築、アレイリスト型のcontentsを用意
 		List<Map<String, Object>> contents = new ArrayList<>();
-
+		
 		// システムプロンプトをuser/modelターンで先頭挿入
-		contents.add(
-				Map.of("role", "user", "parts",
-						List.of(Map.of("text",
-								String.format(GeminiPromptConst.CHAT_SYSTEM, nickname) + taskInfo +
-										"\n【買い物リスト】\n" + soppingInfo))));
+		contents.add(Map.of("role", "user", "parts", List.of(Map.of("text",
+				String.format(GeminiPromptConst.CHAT_SYSTEM, nickname) + taskInfo +
+						"\n【買い物リスト】\n" + soppingInfo
+						+"\n【加入中のサブスクリスト】\n" + sbskInfo))));
 		contents.add(Map.of("role", "model", "parts", List.of(Map.of("text", "了解。タスク情報を把握した。何でも聞いて"))));
 
 		// 会話履歴を追加
@@ -111,6 +116,7 @@ public class ChatSvc {
 		return aiReply;
 	}
 
+	//タスクのリストを文字列にしてる
 	private String buildTaskInfo(List<Task> tasks) {
 		if (tasks.isEmpty())
 			return "登録タスクなし\n";
@@ -123,10 +129,10 @@ public class ChatSvc {
 		return sb.toString();
 	}
 
-	//ここでストリングbuilderでタスクのリストを文字列として受け取る
+	//ここでストリングbuilderで買い物のリストを文字列として受け取る
 	private String buildShopInfo(List<ShoppingList> SList) {
 		if (SList.isEmpty())
-			return "今日の買い物リストはありません。";
+			return "買い物リストはなし";
 		StringBuilder sb = new StringBuilder();
 		for (ShoppingList s : SList) {
 			sb.append("・").append(s.getItemName());
@@ -134,6 +140,17 @@ public class ChatSvc {
 		return sb.toString();
 	}
 
+	//ストリングbuilderでサブスクのリストを文字列として受け取る
+	private String buildSbskInfo(List<Subsk> SbskList) {
+		if (SbskList.isEmpty())
+			return "登録してるサブスクはなし";
+		StringBuilder sb3 = new StringBuilder();
+		for (Subsk s : SbskList) {
+			sb3.append("・").append(s.getSubskName())
+			.append("更新日（期限）：").append(s.getUpdateAt() != null ? s.getUpdateAt() : "未設定");
+		}
+		return sb3.toString();
+	}
 
 	@SuppressWarnings("unchecked")
 	private String extractText(Map response) {
@@ -146,4 +163,11 @@ public class ChatSvc {
 			return "返答の取得に失敗しました。";
 		}
 	}
+	
+	//チャット履歴の全消去
+	public void delChat(String userId) {
+		List<ChatHist> delAllhist = chatHistRepo.findByUserId(userId);
+		chatHistRepo.deleteAll(delAllhist);
+	}
+	
 }

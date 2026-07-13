@@ -74,4 +74,12 @@ public class TaskCtl {
 		taskSvc.deleteTasks(taskIds, userId);
 		return "redirect:/task";
 	}
+	
+	@PostMapping("/task/doneDelete")
+	public String deleteDoneTasks() {
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+		taskSvc.delDoneTasks(userId);
+		return "redirect:/task";
+	}
+	
 }

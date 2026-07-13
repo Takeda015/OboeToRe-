@@ -23,7 +23,7 @@ setInterval(updateDatetimeTicker, 1000);
 
 //タスクモーダル
 function openTaskModal() {
-    document.getElementById("taskModal").style.display = "block";
+    document.getElementById("taskModal").style.display = "flex";
 }
 function closeTaskModal() {
     document.getElementById("taskModal").style.display = "none";
@@ -31,26 +31,14 @@ function closeTaskModal() {
 
 //買い物リストモーダル
 function openSListModal() {
-    document.getElementById("sListModal").style.display = "block";
+    document.getElementById("sListModal").style.display = "flex";
 }
 function closeSListModal() {
     document.getElementById("sListModal").style.display = "none";
 }
 
 
-//トグルメニュー
-function toggleMenu() {
-    const menu = document.getElementById('dropdownMenu');
-    menu.classList.toggle('hidden');
-}
 
-// メニュー外クリックで閉じる
-document.addEventListener('click', function(e) {
-    const wrapper = document.querySelector('.menu-wrapper');
-    if (!wrapper.contains(e.target)) {
-        document.getElementById('dropdownMenu').classList.add('hidden');
-    }
-})
 
 
 //==============================================

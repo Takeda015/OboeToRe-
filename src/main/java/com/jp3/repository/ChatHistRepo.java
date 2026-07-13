@@ -19,5 +19,8 @@ public interface ChatHistRepo extends JpaRepository<ChatHist, Long> {
 
 	// チャット文脈用：直近２０件（新しい順）
 	List<ChatHist> findTop20ByUserIdOrderByCreatedAtDesc(String userId);
+	
+	//チャットリセット用
+	List<ChatHist> findByUserId(String userId);
 
 }

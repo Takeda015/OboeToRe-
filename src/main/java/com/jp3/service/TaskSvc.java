@@ -44,6 +44,13 @@ public class TaskSvc {
 		List<Task> ownedTasks = taskrepo.findByTaskIdInAndUserId(taskIds, userId);
 		taskrepo.deleteAll(ownedTasks);
 	}
+	
+	//所有者確認してDoneを一括削除
+	public void delDoneTasks(String userId) {
+		List<Task> doneTasks = taskrepo.findByUserIdAndStatus(userId, "DONE");
+		taskrepo.deleteAll(doneTasks);
+	}
+	
 
 	// タスク内容編集（所有者確認付き）
 	public void editTask(TaskForm tsf, String userId) {
@@ -69,5 +76,7 @@ public class TaskSvc {
 		ownedTasks.forEach(tsk -> tsk.setStatus(status));
 		taskrepo.saveAll(ownedTasks);
 	}
+	
+	
 
 }
