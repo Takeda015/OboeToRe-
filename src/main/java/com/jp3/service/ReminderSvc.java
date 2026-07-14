@@ -82,7 +82,7 @@ public class ReminderSvc {
 				+ "\n【今日が期限のタスク】\n" + taskInfo
 				+ "\n【最近のユーザーとの会話（参考）】\n" + chatSummary.toString()
 				+ "\n【買い物リスト】\n" + soppingInfo
-				+ "\n【サブスク】\n" + sbskInfo
+				+ "\n【サブスクの更新】\n" + sbskInfo
 				+ "\n" + GeminiPromptConst.REMINDER_SUFFIX;
 
 		List<Map<String, Object>> contents = List.of(

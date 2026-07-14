@@ -2,12 +2,10 @@
 
 
 body {
-	margin: 3px;
+	margin: 0px;
 	/* .home-link の高さ(padding込み目安)+ top:16px 分 */
-	padding-top: 60px;
-	padding-right: 10px;
-	padding-left: 10px;
-	
+	padding: 60px 10px 10px 10px;
+
 	box-sizing: border-box;
 	background:
 		linear-gradient(180deg,
@@ -23,3 +21,4 @@ body {
 	z-index: -3;
 	min-height: 100vh;
 }
+

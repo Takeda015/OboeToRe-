@@ -3,7 +3,7 @@
 body {
 	margin: 0;  
 	box-sizing: border-box;
-	padding-top: 75px;
+	padding: 75px 10px 10px 10px;
 	background:
 		linear-gradient(180deg,
 			rgb(79, 79, 255) 0%,

@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 table {
-	margin-top: 20px;
 	
 	border: 1px solid rgba(0, 100, 200, 0.8);
 	border-radius: 8px;
@@ -18,14 +17,23 @@ table {
 	width: 100%;
 }
 
+.TableWrap {
+	margin-top: 16px;
+	max-height: 70vh;
+	margin-right: 10px;
+	overflow-x: auto;
+	overflow-y: auto;
+	border-radius: 8px;
+
+}
 
 th {
-	/*	background-color: rgb(254, 239, 254);*/
-	/*	 ヘッダー色 */
-	/*	color: rgb(0, 128, 255);*/
-	/*	text-align: left;*/
-	padding: 8px 12px;
-	/*	font-weight: bold;*/
+	
+/*	padding: 8px 12px;*/
+
+	position: sticky;
+	top: 0;
+	z-index: 1;
 
 	font-size: 18px;
 	letter-spacing: 0.12em;
@@ -33,6 +41,7 @@ th {
 	color: #b9aee8;
 	cursor: pointer;
 	background: #fafafe;
+
 }
 
 td {
