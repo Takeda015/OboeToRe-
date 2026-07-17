@@ -106,4 +106,28 @@ function changeSpngStatus(status) {
     }
 }
 
+//行クリックでチェック切り替え＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+function enableRowClickToggle() {
+    document.querySelectorAll('table tbody').forEach(tbody => {
+        tbody.addEventListener('click', (e) => {
+            // リンク（グーグルマップ等）クリック時は何もしない
+            if (e.target.tagName === 'A') return;
+
+            const row = e.target.closest('tr');
+            if (!row) return;
+
+            const checkbox = row.querySelector('.taskCheck, .sListCheck');
+            if (!checkbox) return;
+
+            // チェックボックス自体のクリックは標準動作に任せる（二重トグル防止）
+            if (e.target === checkbox) return;
+
+            checkbox.checked = !checkbox.checked;
+        });
+    });
+}
+
+enableRowClickToggle()
+
 ;

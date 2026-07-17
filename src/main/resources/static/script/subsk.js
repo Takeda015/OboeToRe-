@@ -75,3 +75,28 @@ function toggleUpdateMode(radio) {
     form.querySelector('[name="updateDays"]').disabled = !isDays;
     form.querySelector('[name="updateAt"]').disabled = isDays;
 }
+
+//行クリックでチェック切り替え＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+ function enableRowClickToggle() {
+     document.querySelectorAll('table tbody').forEach(tbody => {
+         tbody.addEventListener('click', (e) => {
+             
+ 			//以下のクラスは動作を除外
+ 			if (e.target.closest('.editBtn')) return;
+
+             const row = e.target.closest('tr');
+             if (!row) return;
+
+             const checkbox = row.querySelector('.sbskCheck');
+             if (!checkbox) return;
+
+             // チェックボックス自体のクリックは標準動作に任せる（二重トグル防止）
+             if (e.target === checkbox) return;
+
+             checkbox.checked = !checkbox.checked;
+         });
+     });
+ }
+
+ enableRowClickToggle()

@@ -1,5 +1,20 @@
 @charset "UTF-8";
 
+/*文字色とかのまとめ設定*/
+:root {
+	--glass: #ffffff;
+
+	--glass-border: rgba(124, 110, 245, 0.15);
+	
+	--accent: #7c6ef5;
+	--accent2: #c084fc;
+	--accent-soft: rgba(124, 110, 245, 0.12);
+	--done: #f3f1fd;
+	
+	--text-primary: rgb(64, 0, 128);
+	--text-secondary: rgba(42, 36, 64, 0.55);
+}
+
 
 
 html,
@@ -23,13 +38,11 @@ body {
 	/*	800下回ったら横スクロール可能*/
 	min-width: 600px;
 	overflow-x: auto;
-	/*	overflow-y: hidden;*/
+
 }
 
 .haikei {
 	position: fixed;
-
-
 	inset: 0;
 	z-index: -5;
 	background-image: url('/img/haikei.png');
@@ -99,20 +112,15 @@ body {
 .flex-container {
 	display: flex;
 	height: 100vh;
-	/*	min-height: 100vh;*/
-	/*			background-color: rgb(0, 128, 255, 0.5);*/
-
 }
 
 .leftSide {
-	/*	background-color: rgb(255, 128, 192, 0.5);*/
 	flex: 1;
-	/*	top: 10vh;*/
 	box-sizing: border-box;
 
 	/* 上・右なし・下・左 */
-	padding-top: 80px;
-	padding-bottom: 5px;
+	padding-top: 81px;
+	padding-bottom: 10px;
 
 
 	/*	縦方向のflexコンテナ*/
@@ -128,34 +136,43 @@ body {
 
 .taskArea1 {
 	padding-left: 5px;
-
-	/*	background-color: rgb(0, 128, 0, 0.5);*/
+	padding-right: 5px;
+	
+	margin-left: 5px;
+	
+/*	margin-bottom: 10px;*/
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	min-height: 150px;
+	min-height: 100px;
 	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.7);
 
 }
 
 
 
 .shoppingListArea {
-	/*	background-color: rgb(0, 0, 0);	*/
-	padding-top: 21px;
-	padding-left: 5px;
-	padding-bottom: 0;
 
-	flex: 1;
+	background: rgba(255, 255, 255, 0.7);
+	
+/*	padding-top: 1px;*/
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 0;
+	
+	margin-top: 20px;
+	margin-left: 5px;
+
+
+	flex: 0.9;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	min-height: 150px;
+	min-height: 100px;
 	border-radius: 8px;
-
 }
-
 
 
 .scroll-wrapper {
@@ -180,62 +197,135 @@ body {
 }
 
 
+
+/*表のタイトル部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝－*/
+
 .area-header {
+	padding-top: 5px;
 	display: flex;
 	align-items: center;
 	gap: 16px;
 }
 
 
+/*ボタン*/
+.area-header button {
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+	
 .area-header button:first-of-type {
 	/* 最初のボタンだけ右端へ押し出す */
 	margin-left: auto;
 
 }
 
-table {
-
-	border-collapse: collapse;
-	/* セル間の隙間をなくす */
-	font-size: 14px;
-	background-color: rgba(255, 255, 255, 0.85);
-	border-radius: 8px;
-	overflow: hidden;
-
-	/*	折り返さない*/
-	white-space: nowrap;
-	width: 100%;
-	z-index: 1;
+.area-header button:hover {
+  opacity: 0.8;
 }
 
+/* 完了ボタン：塗りつぶし */
+.area-header button:first-of-type {
+  margin-left: auto;
+  border: none;
+  background: var(--accent);
+  color: white;
+}
+
+/* 追加ボタン：枠線のみ */
+.area-header button:last-of-type {
+  border: 2px solid var(--glass-border);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+
+
+
+/*文字*/
+.area-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0; 
+
+  /* テキスト部分の見た目 */
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/*テーブルの本体＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝－*/
+
+table {
+
+	border-collapse: separate;
+	border-spacing: 0 5px;
+	font-size: 14px;
+	background: transparent;
+	width: 100%;
+	white-space: nowrap;
+	z-index: 1;
+	border-radius: 8px;
+}
+
+
+
+
+
 th {
-	background-color: rgb(143, 214, 248);
-	/* ヘッダー色 */
-	color: white;
+	background: transparent;
+
+	color: var(--text-secondary);
 	text-align: left;
-	padding: 8px 12px;
-	font-weight: bold;
+	padding: 0 12px 6px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	border-bottom: none;
+
 }
 
 td {
-	padding: 6px 12px;
-	border-bottom: 1px solid #e0e0e0;
+
+	padding: 8px 12px;
+	border-bottom: none;
 	vertical-align: middle;
+	color: var(--text-primary);
 }
 
-/* 1行おきに背景色（ゼブラストライプ） */
+
+tbody tr {
+
+	background: rgba(255, 255, 255, 0.7);
+	transition: all 0.25s;
+}
+
 tbody tr:nth-child(even) {
-	background-color: rgb(240, 248, 255);
+	background: rgba(255, 255, 255, 0.7);
+
 }
 
 /* ホバー時にハイライト */
 tbody tr:hover {
-	background-color: rgba(200, 230, 255, 0.8);
+/*	background-color: rgba(200, 230, 255, 0.8);*/
+	background-color: rgba(255, 204, 28,0.5);	
 	cursor: pointer;
-	z-index: 1;
+	/*	z-index: 1;*/
 }
 
-
+tbody tr td a {
+  cursor: pointer; 
+}
 
 /*=====右側の部分===============*/
 .right-col {
@@ -271,7 +361,7 @@ tbody tr:hover {
 .char_image {
 
 	display: block;
-	height: 500px;
+	height: 410px;
 	/*width: 50%;*/
 
 	width: auto;
@@ -286,7 +376,7 @@ tbody tr:hover {
 
 	position: absolute;
 	/* キャラ上部からの距離 */
-	top: -50px;
+	top: -144px;
 
 	/* 水平中央揃え */
 	left: 50%;
@@ -299,15 +389,31 @@ tbody tr:hover {
 	word-break: break-all;
 	white-space: normal;
 
-	/* メッセージの背景画像 */
-	background-image: url('/img/remindBack.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-
 	/* 背景画像に合わせてpaddingで文字が画像内に収まるよう調整 */
-	padding: 20px 24px;
-	background-color: transparent;
+	/*	padding: 20px 24px;*/
+	/*	background-color: transparent;*/
 	/* 背景色(判別用) */
-	background: rgb(255, 255, 255, 0.5);
+	background: rgb(255, 255, 255, 0.8);
+
+	border-radius: 16px;
+	padding: 12px 16px;
+	font-size: 14px;
+	line-height: 1.6;
+	box-shadow: 0 4px 24px rgba(124, 110, 245, 0.12);
+
+}
+
+.char_reminder::after {
+	content: '';
+	position: absolute;
+	/*  表示位置*/
+	bottom: -20px;
+	left: 20%;
+
+	transform: translateX(-60%);
+	width: 30px;
+	height: 20px;
+	background: rgb(255, 255, 255, 0.8);
+	clip-path: polygon(0 0, 100% 0, 80% 100%);
+
 }

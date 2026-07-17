@@ -88,36 +88,67 @@
 }
 
 
+
+
+
 /*ふわふわの棒＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝－*/
 .floating-rect1 {
 	position: absolute;
-	top: 40%;
-	right: 25%;
-	width: 10px;
+	top: 42%;
+	right: 18%;
+	width: 20px;
 	height: 250px;
-	/*	border-radius: 16px;*/
+
 	background: rgb(255, 204, 28);
 	/*	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);*/
 
 	animation: floatCenter 5s ease-in-out infinite;
-/*	透明度*/
-	opacity: 0.8;
+	/*	透明度*/
+	opacity: 0.7;
 	z-index: -1;
 }
 
 .floating-rect2 {
 	position: absolute;
-	top: 35%;
+	top: 42%;
+	left: 25%;
+	width: 20px;
+	height: 250px;
+	background: rgb(255, 204, 28);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+
+	animation: floatCenter2 7s ease-in-out infinite;
+	opacity: 0.6;
+	z-index: 3;
+}
+
+.floating-rect3 {
+	position: absolute;
+	top: 41%;
 	left: 30%;
-	width: 10px;
-	height: 200px;
-	/*	border-radius: 16px;*/
+	width: 5px;
+	height: 250px;
 	background: rgb(255, 204, 28);
 	/*	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);*/
 
-	animation: floatCenter 5s ease-in-out infinite;
-	opacity: 0.8;
-	z-index: 3;
+	animation: floatCenter3 7s ease-in-out infinite;
+	opacity: 0.7;
+	z-index: -3;
+}
+
+.floating-rect4 {
+	position: absolute;
+	top: 41%;
+	right: 30%;
+	width: 8px;
+	height: 260px;
+	/*	border-radius: 16px;*/
+	background: rgb(255, 204, 28);
+/*	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);*/
+
+	animation: floatCenter3 5s ease-in-out infinite;
+	opacity: 0.5;
+	z-index: -3;
 }
 
 
@@ -133,7 +164,29 @@
 	}
 }
 
+@keyframes floatCenter2 {
 
+	0%,
+	100% {
+		transform: translate(-50%, -50%) translateY(0) rotate(0deg);
+	}
+
+	50% {
+		transform: translate(-50%, -50%) translateY(-20px) rotate(0deg);
+	}
+}
+
+@keyframes floatCenter3 {
+
+	0%,
+	100% {
+		transform: translate(-50%, -50%) translateY(-18px) rotate(0deg);
+	}
+
+	50% {
+		transform: translate(-50%, -50%) translateY(0) rotate(0deg);
+	}
+}
 
 
 
@@ -165,7 +218,7 @@
 	width: 200%;
 
 	/*	波の高さ*/
-	
+
 	height: 40vh;
 
 

@@ -1,5 +1,7 @@
 package com.jp3.service;
 
+import java.time.LocalDateTime;
+
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +26,43 @@ public class UserSvc {
 	@Autowired
 	private PasswordEncoder passwordEncoder; // SecurityConfigのBeanが注入される
 
-	//IDとニックネーム表示===================
-	public String getNowNickname(String userId) {
-		
+	public boolean firstLoginCheck(String userId) {
 		User user = userRepository.findByUserId(userId)
 				.orElseThrow(() -> new IllegalStateException("ユーザーが見つかりません"));
-		
-		String nowNickname=user.getNickname();
-		return nowNickname;
-		
+
+		boolean firstloginGdg = false;
+		if (user.getLastLoginAt() == null) {
+			firstloginGdg = true;
+			user.setLastLoginAt(LocalDateTime.now());
+		    userRepository.save(user);
+		}
+
+		return firstloginGdg;
+	}
+
+	public String Greeting(String userId) {
+		User user = userRepository.findByUserId(userId)
+				.orElseThrow(() -> new IllegalStateException("ユーザーが見つかりません"));
+
+		String greetingMsg="""
+				はじめまして、%s。
+				私はオボエちゃん。今から君のタスクをサポートするよ。よろしくね。
+				""".formatted(user.getNickname());
+		return greetingMsg;
 	}
 	
+	
+	//IDとニックネーム表示===================
+	public String getNowNickname(String userId) {
+
+		User user = userRepository.findByUserId(userId)
+				.orElseThrow(() -> new IllegalStateException("ユーザーが見つかりません"));
+
+		String nowNickname = user.getNickname();
+		return nowNickname;
+
+	}
+
 	//ニックネーム変更==============================
 	public void changeNickname(UserNickForm uNickForm) {
 		//UserIDをsecurityフレームワークからとってくる
@@ -44,10 +72,10 @@ public class UserSvc {
 				.orElseThrow(() -> new IllegalStateException("ユーザーが見つかりません"));
 		// 中身がある → そのまま User を返す
 		// 中身がない（→ 例外をthrow
-		
+
 		//ユーザーネーム部分を更新
 		user.setNickname(uNickForm.getNewNickname());
-		
+
 		//更新したエンティティをDBにセーブ
 		userRepository.save(user);
 
