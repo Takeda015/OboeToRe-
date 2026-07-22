@@ -17,12 +17,12 @@
 	<a th:href="@{/home}" class="home-link">ホームに戻る</a>
 
 
-	<h2>オボエちゃっと</h2>
+<!--	<h2>オボエちゃっと</h2>-->
 
 	<!--チャットボックス==============-->
 
 
-
+	<div class="chat-wrapper">
 	<div id="chat-box">
 		<!-- 既存の会話履歴 -->
 		<th:block th:each="h : ${histories}">
@@ -34,11 +34,11 @@
 		</th:block>
 
 		<!--キャラアイコン表示-->
-		<img class="chatIcon_image" th:src="@{/img/ChatIcon.png}" alt="チャットアイコン">
+		
 	</div>
 	<!--ちゃっとぼっくす終わり=========-->
-
-
+	<img class="chatIcon_image" th:src="@{/img/ChatIcon.png}" alt="チャットアイコン">
+</div>
 
 	<div class="chatFutter">
 		<div class="ChatdelBt">

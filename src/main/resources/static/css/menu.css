@@ -34,20 +34,22 @@
 
 
 	position: absolute;
+	padding: 8px;
 	right: 0;
 	top: 100%;
+	margin-top: 5px;
 	background: white;
 	border: 1px solid #ccc;
-
 	border-radius: 4px;
 	min-width: 160px;
 	z-index: 200;
-	padding: 8px;
+	
 	overflow: hidden;
 }
 
 .dropdown a.menu-item,
 .dropdown button.menu-item {
+	padding: 5px;
 	display: block;
 	width: 100%;
 	/*	padding: 8px 10px;*/

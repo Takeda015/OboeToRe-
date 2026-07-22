@@ -55,10 +55,15 @@ body {
 
 
 
-input {
-	font-size: 20px;
-}
-
 .loginset button {
 	font-size: 20px;
 }
+
+
+input{
+	font-size: 20px;
+	padding: 10px;
+	border-radius: 8px;
+	border: 1.5px solid #dddaf2;
+	background: #fafafe;
+	}

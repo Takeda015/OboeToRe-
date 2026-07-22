@@ -26,7 +26,8 @@
 
 
 
-	<h3>買い物リスト</h3>
+<!--	<h3>買い物リスト</h3>-->
+<h3></h3>
 	<button type="button" onclick="changeStatus('DONE')">完了に変更</button>
 	<button type="button" onclick="changeStatus('TODO')">未完了に変更</button>
 	<button type="button" onclick="delSList()">削除</button>
@@ -35,30 +36,30 @@
 
 	<!--削除フォ～ム-->
 	<form id="delSLForm" action="/sList/del" method="post">
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 	</form>
-	
-	<div class="TableWrap">
-	<table>
-		<thead>
-			<tr>
-				<th></th>
-				<th>ステータス</th>
-				<th>買うもの</th>
-				<th>詳細</th>
-			</tr>
-		</thead>
 
-		<!--買い物リストを持ってきて表示してる部分-->
-		<tbody>
-			<tr th:each="todoSLists : ${todoSLists}">
-				<td><input type="checkbox" class="sListCheck" th:value="${todoSLists.shoppingId}"></td>
-				<td th:text="${todoSLists.status}"></td>
-				<td th:text="${todoSLists.itemName}"></td>
-				<td th:text="${todoSLists.description}"></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="TableWrap">
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th>ステータス</th>
+					<th>買うもの</th>
+					<th>詳細</th>
+				</tr>
+			</thead>
+
+			<!--買い物リストを持ってきて表示してる部分-->
+			<tbody>
+				<tr th:each="todoSLists : ${todoSLists}">
+					<td><input type="checkbox" class="sListCheck" th:value="${todoSLists.shoppingId}"></td>
+					<td th:text="${todoSLists.status}"></td>
+					<td th:text="${todoSLists.itemName}"></td>
+					<td th:text="${todoSLists.description}"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 
@@ -79,8 +80,14 @@
 			<h2>買い物リスト追加</h2>
 			<form action="/sList" method="post">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-				<p>買うもの<input type="text" name="itemName"></p>
-				<p>備考<input type="text" name="description"></p>
+				<p>買うもの</p>
+				<p>
+					<input type="text" name="itemName">
+				</p>
+				<p>備考</p>
+				<p>
+					<input type="text" name="description">
+				</p>
 
 				<!--ページ判別用の引数↓-->
 				<input type="hidden" name="redirectTo" value="shoppingListPage">

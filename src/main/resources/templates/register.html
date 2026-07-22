@@ -8,18 +8,22 @@
 	<title>UserRegiPage</title>
 
 	<link rel="stylesheet" th:href="@{/css/msg.css}">
+	<link rel="stylesheet" th:href="@{/css/bottun.css}">
+	<link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 
 <body>
 
+	<div class="back">
 	<a th:href="@{/login}">戻る</a>
+	</div>
 
 	<!--	ユーザーのステータスを表示する、IDとあだ名-->
 
 
-
+	
 	<form th:action="@{/register}" method="post">
-
+		<div class="inputRg">
 		<p>ログイン用のユーザーＩＤを、４文字以上の半角英数字で作成</p>
 		<p>※他者との重複不可※必須</p>
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -41,7 +45,7 @@
 		<span id="passwordError" class="error-msg">再入力内容がパスワードと違います</span>
 		<span th:if="${passwordError}" th:text="${passwordError}" class="error-text"></span>
 
-
+		</div>
 		<p><button type="submit" id="submitBtn" disabled>登録</button></p>
 	</form>
 

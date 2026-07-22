@@ -3,7 +3,23 @@
 button {
 	padding: 7px 14px;
 	border-radius: 8px;
-	border: 1px solid rgba(0, 100, 200, 0.8);
-	background-color: rgb(253, 252, 247);
+	/*	border: 1px solid rgba(0, 100, 200, 0.8);*/
+	/*	background-color: rgb(253, 252, 247);*/
 	cursor: pointer;
+
+
+	border: 1.5px solid #dddaf2;
+	background: #fafafe;
+	color: rgb(172, 141, 222);	
+}
+
+button:hover {
+	border: 1.5px solid rgb(240, 185, 38);
+	/*		background: rgb(128, 128, 255);*/
+	/*		background: #b9aee8;*/
+			background: rgb(253, 224, 26);
+	/*		color: white;*/
+	color: rgb(69, 44, 156);
+/*	color: #b9aee8;*/
+
 }

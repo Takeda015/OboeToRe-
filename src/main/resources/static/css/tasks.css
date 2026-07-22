@@ -4,7 +4,8 @@
 body {
 	margin: 0px;
 	/* .home-link の高さ(padding込み目安)+ top:16px 分 */
-	padding: 60px 10px 10px 10px;
+	padding-top: 60px ;
+	padding-left: 10px;
 
 	box-sizing: border-box;
 	background:
@@ -18,6 +19,7 @@ body {
 	background-size: cover;
 	background-blend-mode: normal;
 	position: relative;
+	background-repeat: no-repeat;
 	z-index: -3;
 	min-height: 100vh;
 }

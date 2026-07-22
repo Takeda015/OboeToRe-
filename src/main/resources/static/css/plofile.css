@@ -25,6 +25,17 @@ body {
 
 }
 
+input[type="text"],
+input[type="password"] {
+
+	padding: 10px;
+	border-radius: 8px;
+	border: 1.5px solid #dddaf2;
+	background: #fafafe;
+	margin: 5px;
+
+}
+
 .Ustates {
 
 	background-color: rgb(255, 255, 255);

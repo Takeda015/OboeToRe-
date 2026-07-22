@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+
+
+
 .modal {
 	display: none;
 	position: fixed;
@@ -83,3 +86,12 @@
 .sendButton {
 	padding: 10px 14px;
 }
+
+
+
+input{
+	padding: 10px;
+	border-radius: 8px;
+	border: 1.5px solid #dddaf2;
+	background: #fafafe;
+	}
